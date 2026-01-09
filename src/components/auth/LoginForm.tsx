@@ -1,8 +1,21 @@
+import { useState } from "react";
 import { FormCancelButton, FormSubmitButton } from "../form/FormAction";
 import { EmailInput, FormInput } from "../form/FormInput";
 import { FormLabel } from "../form/FormLabel"
 
+export interface ICredentials {
+  email: string,
+  password: string
+}
+
 export default function LoginForm() {
+  const [credentials, setCredentials] = useState<ICredentials>({
+    email: "",
+    password: "",
+  })
+
+  console.log(credentials)
+
   return(
     <>
       <form id="loginForm" className="flex flex-col gap-5 p-5">
@@ -20,6 +33,10 @@ export default function LoginForm() {
           <div className="w-full md:w-3/4">
             <FormInput type="password" name="password" placeholder="Enter your Password" />
           </div>
+        </div>
+
+        <div className="flex flex-col md:flex-row justify-end">
+          <a href="/forget-password" className="text-teal-800 italic text-sm hover:underline">Forget Password</a>
         </div>
 
         <div className="flex flex-col md:flex-row w-full items-center gap-5">
