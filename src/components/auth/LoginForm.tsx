@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FormCancelButton, FormSubmitButton } from "../form/FormAction";
 import { EmailInput, FormInput } from "../form/FormInput";
 import { FormLabel } from "../form/FormLabel"
+import { NavLink } from "react-router";
 
 export interface ICredentials {
   email: string,
@@ -36,7 +37,7 @@ export default function LoginForm() {
         </div>
 
         <div className="flex flex-col md:flex-row justify-end">
-          <a href="/forget-password" className="text-teal-800 italic text-sm hover:underline">Forget Password</a>
+          <NavLink to="/forget-password" className="text-teal-800 italic text-sm hover:underline">Forget Password</NavLink>
         </div>
 
         <div className="flex flex-col md:flex-row w-full items-center gap-5">
