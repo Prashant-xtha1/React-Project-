@@ -1,3 +1,4 @@
+import { NavLink } from "react-router";
 import { PageHeadingWithSubtitle } from "../../components/page-heading/PageHeading";
 export default function ForgetPasswordPage() {
 
@@ -20,7 +21,7 @@ export default function ForgetPasswordPage() {
         </span>
 
         <div className="flex w-full justify-center">
-          <a href="/login" className="cursor-pointer hover:underline w-full p-2 bg-[#ffffff] text-green-950 rounded-full border border-[#002700] text-center">Login Here</a>
+          <NavLink to="/" className="cursor-pointer hover:underline w-full p-2 bg-[#ffffff] text-green-950 rounded-full border border-[#002700] text-center">Login Here</NavLink>
         </div>
       </div>
     </div>

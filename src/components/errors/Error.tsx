@@ -1,3 +1,4 @@
+import { NavLink } from "react-router";
 import { PageHeadingWithSubtitle } from "../page-heading/PageHeading"
 
 export const NotFound = ({redirectLink, redirectTxt}: Readonly<{redirectLink: string, redirectTxt: string}>) => {
@@ -16,7 +17,7 @@ export const NotFound = ({redirectLink, redirectTxt}: Readonly<{redirectLink: st
         </span>
 
         <div className="flex w-full justify-center">
-          <a href={redirectLink} className="cursor-pointer hover:underline w-full p-2 bg-red-200 text-red-950 rounded-full border border-red-950 text-center">{redirectTxt}</a>
+          <NavLink to={redirectLink} className="cursor-pointer hover:underline w-full p-2 bg-red-200 text-red-950 rounded-full border border-red-950 text-center">{redirectTxt}</NavLink>
         </div>
       </div>   
     </>
