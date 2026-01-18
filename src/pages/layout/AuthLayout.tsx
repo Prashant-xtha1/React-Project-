@@ -1,16 +1,38 @@
 import { NavLink, Outlet } from "react-router";
 import { PageHeadingWithSubtitle } from "../../components/page-heading/PageHeading";
+import { useState, type Dispatch, type SetStateAction } from "react";
+
+export interface ILayoutData {
+  pageTitle: string,
+  subTitle: string,
+  btnTxt: string,
+  btnLink: string,
+};
+
+export interface IOutletContext {
+  setLayoutData: Dispatch<SetStateAction<ILayoutData>>
+}
 
 export default function AuthLayout() {
+  const [layoutData, setLayoutData] = useState<ILayoutData>({
+    pageTitle: "Login From Here",
+    subTitle: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis quam ut eaque atque beatae?",
+    btnTxt: "Register Here",
+    btnLink: "/register"
+  });
+
   return (<>
     <section className="h-screen flex flex-col items-center justify-center p-2">
       <div className="w-full md:w-2xl lg:w-3xl xl:2-4xl shadow-2xl bg-stone-200/75 rounded-tl-[10px] rounded-br-[10px] p-5 py-10">
 
-        <PageHeadingWithSubtitle title="Login From Here">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis quam ut eaque atque beatae? Minima
+        <PageHeadingWithSubtitle title={layoutData.pageTitle}>
+          {layoutData.subTitle}
         </PageHeadingWithSubtitle>
 
-        <Outlet />
+        <Outlet context= {{
+            layoutData,
+            setLayoutData
+          }} />
 
         <div className="w-full flex flex-col gap-5">
           <span className="flex items-center">
@@ -20,7 +42,7 @@ export default function AuthLayout() {
           </span>
 
           <div className="flex w-full justify-center">
-            <NavLink to="/register" className="cursor-pointer hover:underline w-full p-2 bg-[#ffffff] text-green-950 rounded-full border border-[#002700] text-center">Register Here</NavLink>
+            <NavLink to={layoutData.btnLink} className="cursor-pointer hover:underline w-full p-2 bg-[#ffffff] text-green-950 rounded-full border border-[#002700] text-center">{layoutData.btnTxt}</NavLink>
           </div>
         </div>
       </div>
