@@ -3,19 +3,24 @@ import { FormInputControl } from "../form/FormInput";
 import { FormLabel } from "../form/FormLabel"
 import { NavLink } from "react-router";
 import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export interface ICredentials {
   email: string,
   password: string
 }
 
+export const LoginDTO = z.object({
+  email: z.email().nonempty().nonoptional(),
+  password: z.string().min(8).nonempty().nonoptional(),
+})
+
 export default function LoginForm() {
   // using hook useForm
-  const {control, handleSubmit} = useForm({
-    defaultValues: {
-      email: "",
-      password: "",
-    },
+  const {control, handleSubmit, formState: {errors} } = useForm({
+    defaultValues: { email: "", password: "", },
+    resolver: zodResolver(LoginDTO),
   });
 
 
@@ -23,6 +28,7 @@ export default function LoginForm() {
     console.log("Submitted Successfully", credentials);
   }
 
+  console.log(errors)
   return(
     <>
       <form onSubmit={handleSubmit(submitForm)} id="loginForm" className="flex flex-col gap-5 p-5">
@@ -34,7 +40,7 @@ export default function LoginForm() {
             {/* <FormInput type="email" name="email" placeholder="Enter your email as username" /> */}
             {/* <FormInputControl name="email" type="email" placeholder="Enter your email as username" handler={control} /> */}
 
-            <FormInputControl <ICredentials> name="email" type="email" control={control} placeholder="Enter your email as username" />
+            <FormInputControl <ICredentials> name="email" type="email" control={control} placeholder="Enter your email as username" errMsg= {errors?.email?.message} />
           </div>
         </div>
 
@@ -42,7 +48,7 @@ export default function LoginForm() {
           <FormLabel htmlFor="password">Password: </FormLabel>
           <div className="w-full md:w-3/4">
             {/* <FormInput type="password" name="password" placeholder="Enter your Password" handler={register} /> */}
-            <FormInputControl  name="password" type="password" placeholder="Enter your Password" control={control} />
+            <FormInputControl  name="password" type="password" placeholder="Enter your Password" control={control} errMsg= {errors?.password?.message} />
           </div>
         </div>
 
