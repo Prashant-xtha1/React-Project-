@@ -5,8 +5,7 @@ import { NavLink } from "react-router";
 import { useForm } from "react-hook-form";
 import { LoginDTO, type ICredentials } from "./auth.contract";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-
+import Cookies from "js-cookie"
 
 export default function LoginForm() {
   // using hook useForm
@@ -18,6 +17,12 @@ export default function LoginForm() {
 
   const submitForm = (credentials: ICredentials) => {
     console.log("Submitted Successfully", credentials);
+
+    Cookies.set("token", "", {
+      expires: 1,
+      secure: true,
+      sameSite: "Lax"
+    })
   }
 
   console.log(errors)
