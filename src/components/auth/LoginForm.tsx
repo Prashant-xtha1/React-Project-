@@ -1,5 +1,5 @@
 import { FormCancelButton, FormSubmitButton } from "../form/FormAction";
-import { EmailInput, FormInput } from "../form/FormInput";
+import { FormInputControl } from "../form/FormInput";
 import { FormLabel } from "../form/FormLabel"
 import { NavLink } from "react-router";
 import { useForm } from "react-hook-form";
@@ -11,7 +11,7 @@ export interface ICredentials {
 
 export default function LoginForm() {
   // using hook useForm
-  const {register, handleSubmit} = useForm({
+  const {control, handleSubmit} = useForm({
     defaultValues: {
       email: "",
       password: "",
@@ -30,15 +30,19 @@ export default function LoginForm() {
         <div className="flex flex-col w-full md:flex-row md:items-center">
           <FormLabel htmlFor="email">Username: </FormLabel>
           <div className="w-full md:w-3/4">
-            <EmailInput name="email" placeholder="Enter your email as username" handler={register} />
+            {/* <EmailInput name="email" placeholder="Enter your email as username" handler={register} /> */}
             {/* <FormInput type="email" name="email" placeholder="Enter your email as username" /> */}
+            {/* <FormInputControl name="email" type="email" placeholder="Enter your email as username" handler={control} /> */}
+
+            <FormInputControl <ICredentials> name="email" type="email" control={control} placeholder="Enter your email as username" />
           </div>
         </div>
 
         <div className="flex flex-col md:flex-row md:items-center">
           <FormLabel htmlFor="password">Password: </FormLabel>
           <div className="w-full md:w-3/4">
-            <FormInput type="password" name="password" placeholder="Enter your Password" handler={register} />
+            {/* <FormInput type="password" name="password" placeholder="Enter your Password" handler={register} /> */}
+            <FormInputControl  name="password" type="password" placeholder="Enter your Password" control={control} />
           </div>
         </div>
 
