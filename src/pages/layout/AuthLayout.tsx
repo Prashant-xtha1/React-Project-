@@ -1,17 +1,7 @@
 import { NavLink, Outlet } from "react-router";
 import { PageHeadingWithSubtitle } from "../../components/page-heading/PageHeading";
-import { useState, type Dispatch, type SetStateAction } from "react";
-
-export interface ILayoutData {
-  pageTitle: string,
-  subTitle: string,
-  btnTxt: string,
-  btnLink: string,
-};
-
-export interface IOutletContext {
-  setLayoutData: Dispatch<SetStateAction<ILayoutData>>
-}
+import { useState } from "react";
+import type { ILayoutData } from "./layout.contract";
 
 export default function AuthLayout() {
   const [layoutData, setLayoutData] = useState<ILayoutData>({

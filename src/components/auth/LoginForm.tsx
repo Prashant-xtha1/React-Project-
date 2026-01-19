@@ -3,18 +3,10 @@ import { FormInputControl } from "../form/FormInput";
 import { FormLabel } from "../form/FormLabel"
 import { NavLink } from "react-router";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
+import { LoginDTO, type ICredentials } from "./auth.contract";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-export interface ICredentials {
-  email: string,
-  password: string
-}
 
-export const LoginDTO = z.object({
-  email: z.email().nonempty().nonoptional(),
-  password: z.string().min(8).nonempty().nonoptional(),
-})
 
 export default function LoginForm() {
   // using hook useForm

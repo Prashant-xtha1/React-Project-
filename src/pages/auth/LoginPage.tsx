@@ -2,7 +2,7 @@
 import LoginForm from "../../components/auth/LoginForm";
 import { useOutletContext } from "react-router";
 import { useEffect } from "react";
-import type { IOutletContext } from "../layout/AuthLayout";
+import type { IOutletContext } from "../layout/layout.contract";
 
 export default function LoginPage() {
   // interpolation {}

@@ -2,7 +2,7 @@
 // <></> -> fragmentation
 import { useEffect } from "react";
 import { useOutletContext } from "react-router";
-import type { IOutletContext } from "../layout/AuthLayout";
+import type { IOutletContext } from "../layout/layout.contract";
 
 export default function RegisterPage() {
   const outletContext = useOutletContext<IOutletContext>();

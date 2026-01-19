@@ -1,13 +1,5 @@
-import type React from "react";
-import { Controller, useController, type Control, type FieldValues, type Path } from "react-hook-form";
-
-export interface IInputProps<T extends FieldValues> {
-  name: Path<T>,
-  placeholder?: string,
-  type?: React.HTMLInputTypeAttribute,
-  control: Control<T>,
-  errMsg?: string,
-}
+import { Controller, useController, type FieldValues} from "react-hook-form";
+import type { IInputProps, IGeneralInput, IFormInputProps } from "./form.contract";
 
 export const FormInputControl = <T extends FieldValues> ({ type, name, placeholder, control, errMsg='' }: Readonly<IInputProps<T>>) => {
   const { field } = useController({
@@ -25,17 +17,6 @@ export const FormInputControl = <T extends FieldValues> ({ type, name, placehold
     </>
   );
 };
-
-export interface IGeneralInput {
-  name: string,
-  placeholder?: string,
-  // eslint-disable-next-line
-  handler: any
-}
-
-export interface IFormInputProps extends IGeneralInput {
-  type?: string
-}
 
 // Generic FormInput
 export const FormInput = ({ type, name, placeholder, handler }: Readonly<IFormInputProps>) => {
