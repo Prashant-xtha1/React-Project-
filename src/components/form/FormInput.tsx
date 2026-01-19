@@ -5,21 +5,23 @@ export interface IInputProps<T extends FieldValues> {
   name: Path<T>,
   placeholder?: string,
   type?: React.HTMLInputTypeAttribute,
-  control: Control<T>
+  control: Control<T>,
+  errMsg?: string,
 }
 
-export const FormInputControl = <T extends FieldValues> ({ type, name, placeholder, control }: Readonly<IInputProps<T>>) => {
+export const FormInputControl = <T extends FieldValues> ({ type, name, placeholder, control, errMsg='' }: Readonly<IInputProps<T>>) => {
   const { field } = useController({
     name: name,
     control: control
   })
   return (
     <>
-      <input className="rounded-[10px] border border-[#5d5d5d] w-full p-2"
+      <input className= {`rounded-[10px] border w-full p-2 ${errMsg ? "border-red-500" : "border-[#5d5d5d]" } `}
         type={type}
         id={name}
         {...field}
         placeholder={placeholder} />
+        <span className="mt-1 text-sm text-red-500">{errMsg}</span>
     </>
   );
 };
