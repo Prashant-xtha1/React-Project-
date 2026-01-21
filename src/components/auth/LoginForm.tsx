@@ -4,11 +4,12 @@ import { FormLabel } from "../form/FormLabel"
 import { NavLink, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 
-import { LoginDTO, type ICredentials } from "./auth.contract";
+import { LoginDTO, type ICredentials, type IUser } from "./auth.contract";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Cookies from "js-cookie"
-import axiosInstance from "../../config/axios.config";
+// import axiosInstance from "../../config/axios.config";
 import { toast } from "sonner";
+import { useAuth } from "../../hook/auth";
+
 
 export default function LoginForm() {
   // using hook useForm
@@ -17,22 +18,17 @@ export default function LoginForm() {
     resolver: zodResolver(LoginDTO),
   });
 
+  const { login, getLoggedInUser } = useAuth()
   const navigate = useNavigate();
 
   const submitForm = async (credentials: ICredentials) => {
     try {
-      const response = await axiosInstance.post("auth/login", credentials);
-      Cookies.set("token", response.data, {
-        expires: 1,
-        secure: true,
-        sameSite: "Lax"
-      })
-      const loggedInUser = await axiosInstance.get("auth/me");
+      await login(credentials)
+      const loggedInUser = await getLoggedInUser() as unknown as IUser;
 
-      toast.success("Welcome to User Panel, " + loggedInUser.data.name);
-      navigate("/" + loggedInUser.data.role)
-      console.log("Submitted Successfully", credentials);
-      // console.log(response);
+      toast.success("Welcome to User Panel, " + loggedInUser.name);
+      navigate("/" + loggedInUser.role)
+      
     } catch (exception) {
       console.log(exception);
       toast.error("Sorry! Could not login now!!!", {
