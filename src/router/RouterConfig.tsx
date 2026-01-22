@@ -9,6 +9,7 @@ import ErrorPage from "../pages/ErrorPage";
 import AuthLayout from "../pages/layout/AuthLayout";
 import UserLayout from "../pages/layout/UserLayout";
 import UserDashboard from "../pages/dashboard/UserDashboard";
+import UserListPage from "../pages/user/UserListPage";
 
 const router = createBrowserRouter([
   // { path: "/", Component: LoginPage },
@@ -19,7 +20,9 @@ const router = createBrowserRouter([
   ] },
 
   { path: "/admin", element: <UserLayout />, children: [
-    { index: true, element: <UserDashboard /> }
+    { index: true, element: <UserDashboard /> },
+    { path: "user", element: <UserListPage /> },
+    { path: "user/:userId", element: <UserListPage /> }
   ] },
 
   { path: "/forget-password", element: <ForgetPasswordPage /> },

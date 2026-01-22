@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import AuthContext from "../AuthContext";
 import type { ICredentials, IUser } from "../../components/auth/auth.contract";
 import axiosInstance from "../../config/axios.config";
@@ -6,7 +6,8 @@ import Cookies from "js-cookie";
 
 export default function AuthProvider({ children }: Readonly<{ children: ReactNode }>) {
 
-  const [ loggedInUser, setLoggedInUser ] = useState<IUser>()
+  const [ loggedInUser, setLoggedInUser ] = useState<IUser>();
+  const [ loading, setLoading ] = useState<boolean>(true)
 
   const login = async (credentials: ICredentials): Promise<IUser | void> => {
     try {
@@ -29,16 +30,25 @@ export default function AuthProvider({ children }: Readonly<{ children: ReactNod
       return userDetail.data
     } catch {
       
+    } finally {
+      setLoading(false)
     }
   }
 
+  useEffect(() => {
+    getLoggedInUser()
+  }, [])
+
   return (<>
-    <AuthContext.Provider value={{
-      login,
-      getLoggedInUser,
-      loggedInUser
-    }}>
-      {children}
-    </AuthContext.Provider>
+    {
+      loading ? "Loading...." : 
+      <AuthContext.Provider value={{
+        login,
+        getLoggedInUser,
+        loggedInUser
+      }}>
+        {children}
+      </AuthContext.Provider>
+    }
   </>)
 }
