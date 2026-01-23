@@ -8,7 +8,7 @@ export interface IFormActionButtons {
 export const FormCancelButton = ({ label="Cancel", disabled=false }: Readonly<IFormActionButtons>) => {
   return (
   <>
-    <button disabled={disabled} className="cursor-pointer hover:underline hover:scale-96 transition w-full p-2 bg-[#7d0000] text-[#ffffff] rounded-[10px] border border-[#7e0000]">
+    <button disabled={disabled} className="disabled:bg-red-900/50 disabled:cursor-not-allowed cursor-pointer hover:underline hover:scale-96 transition w-full p-2 bg-[#7d0000] text-[#ffffff] rounded-[10px] border border-[#7e0000]">
       {label}
     </button>
   </>
@@ -18,7 +18,7 @@ export const FormCancelButton = ({ label="Cancel", disabled=false }: Readonly<IF
 export const FormSubmitButton = ({ label="Submit", disabled=false }: Readonly<IFormActionButtons>) => {
   return (
   <>
-    <button disabled={disabled} className="cursor-pointer hover:underline hover:scale-96 transition w-full p-2 bg-[#002600] text-[#ffffff] rounded-[10px] border border-[#002700]">
+    <button disabled={disabled} className="disabled:bg-teal-900/50 disabled:cursor-not-allowed cursor-pointer hover:underline hover:scale-96 transition w-full p-2 bg-[#002600] text-[#ffffff] rounded-[10px] border border-[#002700]">
       {label}
     </button>
   </>
