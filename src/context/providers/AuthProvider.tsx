@@ -11,7 +11,7 @@ export default function AuthProvider({ children }: Readonly<{ children: ReactNod
 
   const login = async (credentials: ICredentials): Promise<IUser | void> => {
     try {
-      const response = await axiosInstance.post("/auth/login", credentials);
+      const response = await axiosInstance.post("auth/login", credentials);
       Cookies.set("token", response.data , {
         expires: 1, secure: true, sameSite: "Lax"
       })
