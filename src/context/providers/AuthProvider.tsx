@@ -35,6 +35,11 @@ export default function AuthProvider({ children }: Readonly<{ children: ReactNod
     }
   }
 
+  const logout = (): void => {
+    Cookies.remove("token");
+    setLoggedInUser(undefined);
+  }
+
   useEffect(() => {
     getLoggedInUser()
   }, [])
@@ -45,7 +50,8 @@ export default function AuthProvider({ children }: Readonly<{ children: ReactNod
       <AuthContext.Provider value={{
         login,
         getLoggedInUser,
-        loggedInUser
+        loggedInUser,
+        logout
       }}>
         {children}
       </AuthContext.Provider>
