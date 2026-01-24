@@ -20,8 +20,8 @@ export const UserHeader = ({ loggedInUser }: Readonly<{ loggedInUser: IUser }>) 
       <div className="flex items-center justify-between w-full px-6">
         <h1 className="text-2xl font-bold">One-Piece</h1>
         <nav className="flex gap-6">
-          <NavLink to={`/${loggedInUser.role}/profiles`} className="hover:text-green-200">Profile</NavLink>
-          <NavLink to={`/${loggedInUser.role}/settings`} className="hover:text-green-200">Settings</NavLink>
+          <NavLink to={loggedInUser && `/${loggedInUser.role}/profiles`} className="hover:text-green-200">Profile</NavLink>
+          <NavLink to={loggedInUser && `/${loggedInUser.role}/settings`} className="hover:text-green-200">Settings</NavLink>
           <button onClick={handleLogout}
           className="hover:text-green-200 cursor-pointer transition-colors">Logout
           </button>
