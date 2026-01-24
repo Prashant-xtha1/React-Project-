@@ -25,7 +25,7 @@ export default function UserLayout() {
       <UserHeader loggedInUser={loggedInUser as IUser} />
       <main className="flex w-full h-screen">
         <UserSidebar loggedInUser={loggedInUser as IUser} />
-        <section className="p-5 bg-sky-500 text-white m-3 rounded-lg w-full ">
+        <section className="p-5 bg-teal-500 text-white m-3 rounded-lg w-full ">
           <Outlet />
         </section>
       </main>
