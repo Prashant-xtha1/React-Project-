@@ -20,7 +20,7 @@ export const TableHeader = ({
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
 
         {/* Left: Title */}
-        <h1 className="text-2xl font-bold text-white whitespace-nowrap">
+        <h1 className="text-2xl font-bold text-black whitespace-nowrap">
           {title}
         </h1>
 
@@ -38,16 +38,14 @@ export const TableHeader = ({
                 <input
                   type="search"
                   placeholder="Enter search keyword..."
-                  className="h-10 w-64 pl-10 pr-4 rounded-lg
-                    text-gray-700 placeholder-gray-400
-                    border border-white/40 bg-white
-                    focus:outline-none focus:ring-2 focus:ring-white"
+                  className="h-10 w-64 pl-10 pr-4 rounded-lg text-black placeholder-black
+                    border border-white/40 bg-white focus:outline-none focus:ring-2 focus:ring-white"
                 />
               </div>
 
               {/* Search Button */}
               <button
-                className="h-10 px-4 bg-white text-teal-600 font-medium rounded-lg
+                className="h-10 px-4 bg-white text-black font-medium rounded-lg
                   hover:bg-teal-50 transition cursor-pointer whitespace-nowrap">
                 Search
               </button>
@@ -59,8 +57,8 @@ export const TableHeader = ({
           {btnUrl && btnTxt && (
             <NavLink
               to={btnUrl}
-              className="h-10 px-5 flex items-center bg-white text-teal-600
-                font-medium rounded-lg hover:bg-teal-50 transition
+              className="h-10 px-5 flex items-center bg-white text-black
+                font-medium rounded-lg hover:bg-green-400 transition
                 cursor-pointer whitespace-nowrap">
               {btnTxt}
             </NavLink>
