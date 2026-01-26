@@ -1,5 +1,6 @@
 import { Controller, useController, type FieldValues} from "react-hook-form";
-import type { IInputProps, IGeneralInput, IFormInputProps } from "./form.contract";
+import type { IInputProps, IGeneralInput, IFormInputProps, ISelectProps, ISingleListItem, IFileInputProps } from "./form.contract";
+import type { BaseSyntheticEvent } from "react";
 
 export const FormInputControl = <T extends FieldValues> ({ type, name, placeholder, control, errMsg='' }: Readonly<IInputProps<T>>) => {
   const { field } = useController({
@@ -81,6 +82,57 @@ export const EmailInputControl = ({ name, placeholder, handler }: Readonly<IGene
           )
         }}
       ></Controller>
+    </>
+  );
+};
+
+export const FormSelectInput = <T extends FieldValues> ({ name, control, options, errMsg='' }: Readonly<ISelectProps<T>>) => {
+  const { field } = useController({
+    name: name,
+    control: control
+  })
+  return (
+    <>
+      <select className= {`rounded-[10px] border w-full p-2 ${errMsg ? "border-red-500" : "border-[#5d5d5d]" } `}
+        {...field}
+      >
+        <option value="">-- Select Any One --</option>
+        {
+          options && options.map((row: ISingleListItem) => (
+            <option value={row.value} key={row.value}>{row.label}</option>
+          ))
+        }
+      </select>
+        <span className="mt-1 text-sm text-red-500">{errMsg}</span>
+    </>
+  );
+};
+
+export const FileInput = <T extends FieldValues> ({ name, control, errMsg='', isMultiple= false }: Readonly<IFileInputProps<T>>) => {
+  const { field } = useController({
+    name: name,
+    control: control
+  })
+  return (
+    <>
+      <input className= {`rounded-[10px] border w-full p-2 ${errMsg ? "border-red-500" : "border-[#5d5d5d]" } `}
+        type={"file"}
+        multiple={isMultiple}
+        onChange={(e: BaseSyntheticEvent) => {
+          
+          // const files = e.target.files; --> it provides object of object to the server i.e. {"0": {}}
+          
+          const files = Object.values(e.target.files)  // passes array of object i.e. [{}]
+
+          if(isMultiple) {
+            field.onChange(files);
+          } else {
+            field.onChange(files[0]);
+          }
+          
+        }}
+      />
+        <span className="mt-1 text-sm text-red-500">{errMsg}</span>
     </>
   );
 };
