@@ -1,10 +1,14 @@
 import { useForm } from "react-hook-form";
 import { TableHeader } from "../../components/ui/TableHeader";
 import { useAuth } from "../../hook/auth";
-import { type IBannerCreateData } from "./banner.contract";
+import { BannerDTO, type IBannerCreateData } from "./banner.contract";
 import { FormLabel } from "../../components/form/FormLabel";
 import { FileInput, FormInputControl, FormSelectInput } from "../../components/form/FormInput";
 import { FormCancelButton, FormSubmitButton } from "../../components/form/FormAction";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
+import axiosInstance from "../../config/axios.config";
+import { useNavigate } from "react-router";
 
 export default function BannerCreatePage() {
   const { loggedInUser } = useAuth();
@@ -13,12 +17,26 @@ export default function BannerCreatePage() {
       title: "",
       url: "",
       status: "",
-      image: null
-    }
+      image: {} as File
+    },
+    resolver: zodResolver(BannerDTO)
   })
 
-  const submitHandler = (data: IBannerCreateData) => {
-    console.log(data)
+  const navigate = useNavigate()
+
+  const submitHandler = async (data: IBannerCreateData) => {
+    try {
+      await axiosInstance.post('/banner', data, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      })
+      toast.success("Banner Created Successfully");
+      navigate(`/${loggedInUser?.role}/banners`)
+    } catch {
+      toast.error("Banner cannot be created a this moment...");
+      
+    }
   }
 
   return(
