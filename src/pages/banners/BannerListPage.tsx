@@ -200,6 +200,10 @@ export default function BannerListPage() {
               </button>
 
               <button className="px-3 py-1 border rounded-lg text-gray-700 hover:bg-gray-100 cursor-pointer">
+                3
+              </button>
+
+              <button className="px-3 py-1 border rounded-lg text-gray-700 hover:bg-gray-100 cursor-pointer">
                 Next
               </button>
             </div>
