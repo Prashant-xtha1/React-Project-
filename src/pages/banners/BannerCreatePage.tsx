@@ -1,0 +1,90 @@
+import { useForm } from "react-hook-form";
+import { TableHeader } from "../../components/ui/TableHeader";
+import { useAuth } from "../../hook/auth";
+import { type IBannerCreateData } from "./banner.contract";
+import { FormLabel } from "../../components/form/FormLabel";
+import { FileInput, FormInputControl, FormSelectInput } from "../../components/form/FormInput";
+import { FormCancelButton, FormSubmitButton } from "../../components/form/FormAction";
+
+export default function BannerCreatePage() {
+  const { loggedInUser } = useAuth();
+  const {control, handleSubmit, formState: {errors, isSubmitting}} = useForm<IBannerCreateData>({
+    defaultValues: {
+      title: "",
+      url: "",
+      status: "",
+      image: null
+    }
+  })
+
+  const submitHandler = (data: IBannerCreateData) => {
+    console.log(data)
+  }
+
+  return(
+    <section className="p-6">
+      <TableHeader title="Banner Create Page" showSearch={false} btnTxt="<- Go Back" btnUrl={`/${loggedInUser?.role}/banners`} />
+      <div className="bg-white rounded-xl shadow-lg p-6">
+        <form onSubmit={handleSubmit(submitHandler)} className="flex flex-col gap-4 text-gray-800" >
+
+          <div className="flex items-center">
+            <FormLabel htmlFor="title">Title:</FormLabel>
+            <div className="w-3/4">
+              <FormInputControl 
+                control={control}
+                name="title"
+                type="text"
+                placeholder="Enter Banner Title here..."
+                errMsg={errors?.title?.message} />
+            </div>
+          </div>
+
+          <div className="flex items-center">
+            <FormLabel htmlFor="url">Url:</FormLabel>
+            <div className="w-3/4">
+              <FormInputControl 
+                control={control}
+                name="url"
+                type="url"
+                placeholder="Enter Banner Link here..."
+                errMsg={errors?.url?.message} />
+            </div>
+          </div>
+
+          <div className="flex items-center">
+            <FormLabel htmlFor="status">Status:</FormLabel>
+            <div className="w-3/4">
+              <FormSelectInput
+                name="status"
+                control={control}
+                errMsg={errors?.status?.message}
+                options={[
+                  {label: "Published", value: 'active'},
+                  {label: "Un-Published", value: 'inctive'}
+                ]}
+              />
+            </div>
+          </div>
+
+          <div className="flex items-center">
+            <FormLabel htmlFor="image">Image:</FormLabel>
+            <div className="w-3/4">
+              <FileInput 
+                name="image"
+                control={control}
+                errMsg={errors?.image?.message}
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col md:flex-row w-full justify-end ">
+            <div className="w-3/4 flex gap-3">
+              <FormCancelButton disabled={isSubmitting} label="Cancel" />
+              <FormSubmitButton disabled={isSubmitting} label="Submit" />
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+  )
+}
