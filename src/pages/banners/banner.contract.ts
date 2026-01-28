@@ -1,10 +1,19 @@
 import z from "zod"
+import type { IImage } from "../../common/GlobalType"
 
 export interface IBannerCreateData {
   title: string,
   url: string,
   status: string,
   image: File 
+}
+
+export interface IBanner {
+  _id: string,
+  title: string,
+  url: string,
+  image: IImage,
+  status: string,
 }
 
 export const BannerDTO = z.object({
