@@ -6,7 +6,7 @@ export default function UserDashboard() {
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold">Admin Dashboard</h1>
-          <p className="text-sm text-sky-100">
+          <p className="text-sm ">
             Welcome back! Here’s an overview of your POS system.
           </p>
         </div>
