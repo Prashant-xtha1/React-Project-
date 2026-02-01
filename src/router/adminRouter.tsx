@@ -11,6 +11,7 @@ export const adminRoutes = [{
 
     { path: "banners", element: <BannerListPage /> },
     { path: "banner/create", element: <BannerCreatePage /> },
+    { path: "banner/:id", element: <BannerCreatePage /> },
 
     { path: "user", element: <UserListPage /> },
     { path: "user/:userId", element: <UserListPage /> },
