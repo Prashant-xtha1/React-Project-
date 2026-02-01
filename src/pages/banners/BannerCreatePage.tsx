@@ -78,7 +78,7 @@ export default function BannerCreatePage() {
                 errMsg={errors?.status?.message}
                 options={[
                   {label: "Published", value: 'active'},
-                  {label: "Un-Published", value: 'inctive'}
+                  {label: "Un-Published", value: 'inactive'}
                 ]}
               />
             </div>
