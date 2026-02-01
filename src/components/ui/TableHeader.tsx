@@ -46,7 +46,7 @@ export const TableHeader = ({
               {/* Search Button */}
               <button
                 className="h-10 px-4 bg-white text-black font-medium rounded-lg
-                  hover:bg-teal-50 transition cursor-pointer whitespace-nowrap">
+                  hover:bg-blue-400 transition cursor-pointer whitespace-nowrap">
                 Search
               </button>
 
