@@ -22,3 +22,4 @@ export const BannerDTO = z.object({
   status: z.string().regex(/^(active|inactive)$/, "Status can only be either Published or Un-Published").nonempty("Status is required"),
   image: z.file().nonoptional()
 })
+
