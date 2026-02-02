@@ -15,26 +15,26 @@ export const UserSidebar = ({ loggedInUser }: Readonly<{ loggedInUser: IUser }>)
 
         {
           loggedInUser && loggedInUser.role === "admin" ? <li>
-          <NavLink to={loggedInUser && `/${loggedInUser.role}/banners`} className="flex items-center gap-3 p-2 rounded hover:bg-stone-700">
-            <FaImage className="text-green-400" /> Banners
-          </NavLink>
-        </li> : <></>
+            <NavLink to={loggedInUser && `/${loggedInUser.role}/banners`} className="flex items-center gap-3 p-2 rounded hover:bg-stone-700">
+              <FaImage className="text-green-400" /> Banners
+            </NavLink>
+          </li> : <></>
         }
 
         {
           loggedInUser && (loggedInUser.role === "admin" || loggedInUser.role === "seller") ? <li>
-          <NavLink to={loggedInUser && `/${loggedInUser.role}/brands`} className="flex items-center gap-3 p-2 rounded hover:bg-stone-700">
-            <FaB className="text-indigo-400" /> Brands
-          </NavLink>
-        </li> : <></>
+            <NavLink to={loggedInUser && `/${loggedInUser.role}/brands`} className="flex items-center gap-3 p-2 rounded hover:bg-stone-700">
+              <FaB className="text-indigo-400" /> Brands
+            </NavLink>
+          </li> : <></>
         }
 
         {
           loggedInUser && (loggedInUser.role === "admin" || loggedInUser.role === "seller") ? <li>
-          <NavLink to={loggedInUser && `/${loggedInUser.role}/categories`} className="flex items-center gap-3 p-2 rounded hover:bg-stone-700">
-            <FaSitemap className="text-cyan-400" /> Categories
-          </NavLink>
-        </li> : <></>
+            <NavLink to={loggedInUser && `/${loggedInUser.role}/categories`} className="flex items-center gap-3 p-2 rounded hover:bg-stone-700">
+              <FaSitemap className="text-cyan-400" /> Categories
+            </NavLink>
+          </li> : <></>
         }
 
         <li>
@@ -45,10 +45,10 @@ export const UserSidebar = ({ loggedInUser }: Readonly<{ loggedInUser: IUser }>)
 
         {
           loggedInUser && (loggedInUser.role === "admin" || loggedInUser.role === "seller") ? <li>
-          <NavLink to={loggedInUser && `/${loggedInUser.role}/products`} className="flex items-center gap-3 p-2 rounded hover:bg-stone-700">
-            <FaShoppingBag className="text-lime-400" /> Products
-          </NavLink>
-        </li> : <></>
+            <NavLink to={loggedInUser && `/${loggedInUser.role}/products`} className="flex items-center gap-3 p-2 rounded hover:bg-stone-700">
+              <FaShoppingBag className="text-lime-400" /> Products
+            </NavLink>
+          </li> : <></>
         }
 
         <li>
