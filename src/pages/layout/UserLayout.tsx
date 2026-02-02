@@ -8,11 +8,11 @@ import { useEffect } from "react";
 import { toast } from "sonner";
 
 export default function UserLayout() {
-  const {loggedInUser} = useAuth();
+  const { loggedInUser } = useAuth();
   const navigate = useNavigate();
 
-    useEffect(() => {
-    if(!loggedInUser) {
+  useEffect(() => {
+    if (!loggedInUser) {
       toast.info("You are not logged in...", {
         description: "Login to access dashboard"
       });
@@ -23,9 +23,9 @@ export default function UserLayout() {
   return (
     <>
       <UserHeader loggedInUser={loggedInUser as IUser} />
-      <main className="flex w-full h-screen">
+      <main className="flex w-full min-h-screen">
         <UserSidebar loggedInUser={loggedInUser as IUser} />
-        <section className="p-5 bg-gray-300 m-3 rounded-lg w-full ">
+        <section className="p-5 bg-gray-300 m-3 rounded-lg w-full overflow-y-auto">
           <Outlet />
         </section>
       </main>
