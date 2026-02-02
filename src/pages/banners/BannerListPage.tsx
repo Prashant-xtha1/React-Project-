@@ -26,7 +26,7 @@ export default function BannerListPage() {
         params: {
           page: page,
           limit: limit,
-          search: search
+          q: search
         }
       }) 
       setBanners(response.data);
@@ -65,7 +65,7 @@ export default function BannerListPage() {
       <div className="p-6">
 
         {/* Page Header (Title + Search + CTA) */}
-        <TableHeader title="Banner Management" showSearch={true} btnUrl="/admin/banner/create" btnTxt="+ Add Banner" />
+        <TableHeader title="Banner Management" showSearch={true} btnUrl="/admin/banner/create" btnTxt="+ Add Banner" getSearchResult={getBannerList} />
 
         {/* Card */}
         <div className="bg-white rounded-xl shadow-lg p-6">
