@@ -1,7 +1,7 @@
 export default function UserDashboard() {
   return (
     <div className="space-y-6">
-      
+
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
@@ -82,7 +82,7 @@ function StatCard({ title, value }) {
   );
 }
 
-function OrderRow({ id, name, amount, status }) {
+function OrderRow({ id, name, amount, status }: { id: string; name: string; amount: string; status: string }) {
   return (
     <tr className="border-t">
       <td className="p-3">{id}</td>
@@ -90,11 +90,10 @@ function OrderRow({ id, name, amount, status }) {
       <td className="p-3">{amount}</td>
       <td className="p-3">
         <span
-          className={`px-2 py-1 rounded text-xs font-semibold ${
-            status === "Paid"
-              ? "bg-green-100 text-green-700"
-              : "bg-yellow-100 text-yellow-700"
-          }`}
+          className={`px-2 py-1 rounded text-xs font-semibold ${status === "Paid"
+            ? "bg-green-100 text-green-700"
+            : "bg-yellow-100 text-yellow-700"
+            }`}
         >
           {status}
         </span>
