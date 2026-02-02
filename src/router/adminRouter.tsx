@@ -1,4 +1,5 @@
 import BannerCreatePage from "../pages/banners/BannerCreatePage";
+import BannerEditPage from "../pages/banners/BannerEditPage";
 import BannerListPage from "../pages/banners/BannerListPage";
 import UserDashboard from "../pages/dashboard/UserDashboard";
 import ErrorPage from "../pages/ErrorPage";
@@ -11,7 +12,7 @@ export const adminRoutes = [{
 
     { path: "banners", element: <BannerListPage /> },
     { path: "banner/create", element: <BannerCreatePage /> },
-    { path: "banner/:id", element: <BannerCreatePage /> },
+    { path: "banner/:id", element: <BannerEditPage /> },
 
     { path: "user", element: <UserListPage /> },
     { path: "user/:userId", element: <UserListPage /> },
