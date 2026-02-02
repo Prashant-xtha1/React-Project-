@@ -8,11 +8,15 @@ import { FormCancelButton, FormSubmitButton } from "../../components/form/FormAc
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import axiosInstance from "../../config/axios.config";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
+import { useEffect, useState } from "react";
 
 export default function BannerEditPage() {
   const { loggedInUser } = useAuth();
-  const {control, handleSubmit, formState: {errors, isSubmitting}} = useForm<IBannerEditData>({
+  const params = useParams()
+  const [ loading, setLoading ] = useState<boolean>(true);
+
+  const {control, handleSubmit, setValue, formState: {errors, isSubmitting}} = useForm<IBannerEditData>({
     defaultValues: {
       title: "",
       url: "",
@@ -26,24 +30,44 @@ export default function BannerEditPage() {
 
   const submitHandler = async (data: IBannerEditData) => {
     try {
-      // await axiosInstance.post('/banner', data, {
-      //   headers: {
-      //     "Content-Type": "multipart/form-data"
-      //   }
-      // })
-      // toast.success("Banner Edited Successfully");
-      // navigate(`/${loggedInUser?.role}/banners`)
+      await axiosInstance.put('/banner/' + params.id, data, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      })
+      toast.success("Banner Edited Successfully");
+      navigate(`/${loggedInUser?.role}/banners`)
     } catch {
-      toast.error("Banner cannot be edited a this moment...");
+      toast.error("Banner cannot be edited at this moment...");
       
     }
   }
+
+  const getBannerDetail = async(): Promise<void> => {
+    try {
+      const response = await axiosInstance.get("/banner/" + params.id)
+      setValue("title", response.data.title);
+      setValue("url", response.data.url)
+      setValue("status", response.data.status);
+    } catch {
+      toast.error("Banner details cannot be fetched at this moment...")
+      navigate(`/${loggedInUser?.role}/banners`)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    // once component renders, fetch api data and update banner state
+    getBannerDetail();
+  }, []);
 
   return(
     <section className="p-6">
       <TableHeader title="Banner Edit Page" showSearch={false} btnTxt="<- Go Back" btnUrl={`/${loggedInUser?.role}/banners`} />
       <div className="bg-white rounded-xl shadow-lg p-6">
-        <form onSubmit={handleSubmit(submitHandler)} className="flex flex-col gap-4 text-gray-800" >
+        {
+          loading ? <>Loading...</> : <form onSubmit={handleSubmit(submitHandler)} className="flex flex-col gap-4 text-gray-800" >
 
           <div className="flex items-center">
             <FormLabel htmlFor="title">Title:</FormLabel>
@@ -102,6 +126,7 @@ export default function BannerEditPage() {
             </div>
           </div>
         </form>
+        }
       </div>
     </section>
   )
