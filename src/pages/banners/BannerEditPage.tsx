@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import axiosInstance from "../../config/axios.config";
 import { useNavigate, useParams } from "react-router";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export default function BannerEditPage() {
   const { loggedInUser } = useAuth();
@@ -43,7 +43,7 @@ export default function BannerEditPage() {
     }
   }
 
-  const getBannerDetail = async(): Promise<void> => {
+  const getBannerDetail = useCallback(async() => {
     try {
       const response = await axiosInstance.get("/banner/" + params.id)
       setValue("title", response.data.title);
@@ -55,12 +55,12 @@ export default function BannerEditPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [params])
 
   useEffect(() => {
     // once component renders, fetch api data and update banner state
     getBannerDetail();
-  }, []);
+  }, [getBannerDetail]);
 
   return(
     <section className="p-6">
