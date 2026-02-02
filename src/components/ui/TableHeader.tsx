@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useEffect, useState, type BaseSyntheticEvent, type ReactNode } from "react";
 import { FaSearch } from "react-icons/fa";
 import { NavLink } from "react-router";
 
@@ -7,6 +7,7 @@ export interface ITableHeaderProps {
   showSearch: boolean;
   btnUrl: string | null;
   btnTxt: ReactNode | null;
+  getSearchResult?: (params: { page?: number, limit?: number, search?: string }) => Promise<void>
 }
 
 export const TableHeader = ({
@@ -14,7 +15,27 @@ export const TableHeader = ({
   showSearch,
   btnUrl,
   btnTxt,
+  getSearchResult
 }: Readonly<ITableHeaderProps>) => {
+  const [search, setSearch] = useState<string>();
+
+  const handleSearch = async () => {
+    if(getSearchResult) {
+      await getSearchResult({search: search, page: 1, limit: 20})
+    }
+  }
+
+  // debounce
+
+  useEffect(() => {
+    const timer = setTimeout(async() => {
+      await handleSearch();
+    }, 500)
+    return () => {
+      clearTimeout(timer);
+    }
+  }, [search])
+
   return (
     <div className="mb-6">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -29,7 +50,7 @@ export const TableHeader = ({
 
           {/* Search (Input + Button together) */}
           {showSearch && (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 ">
 
               {/* Input */}
               <div className="relative">
@@ -38,17 +59,18 @@ export const TableHeader = ({
                 <input
                   type="search"
                   placeholder="Enter search keyword..."
-                  className="h-10 w-64 pl-10 pr-4 rounded-lg text-black placeholder-black
-                    border border-white/40 bg-white focus:outline-none focus:ring-2 focus:ring-white"
+                  className="h-10 w-65 pl-10 pr-4 rounded-lg text-black placeholder-black
+                  border border-white/40 bg-white focus:outline-none focus:ring-2 focus:ring-white"
+                  onChange={(e: BaseSyntheticEvent) => setSearch(e.target.value) }
                 />
               </div>
 
               {/* Search Button */}
-              <button
+              {/* <button
                 className="h-10 px-4 bg-white text-black font-medium rounded-lg
                   hover:bg-blue-400 transition cursor-pointer whitespace-nowrap">
                 Search
-              </button>
+              </button> */}
 
             </div>
           )}
