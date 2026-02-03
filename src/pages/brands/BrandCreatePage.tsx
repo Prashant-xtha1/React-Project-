@@ -14,10 +14,9 @@ export default function BrandCreatePage() {
   const { loggedInUser } = useAuth();
   const {control, handleSubmit, formState: {errors, isSubmitting}} = useForm<IBrandCreateData>({
     defaultValues: {
-      title: "",
-      url: "",
+      name: "",
       status: "",
-      image: {} as File
+      logo: {} as File
     },
     resolver: zodResolver(BrandDTO)
   })
@@ -46,26 +45,14 @@ export default function BrandCreatePage() {
         <form onSubmit={handleSubmit(submitHandler)} className="flex flex-col gap-4 text-gray-800" >
 
           <div className="flex items-center">
-            <FormLabel htmlFor="title">Title:</FormLabel>
+            <FormLabel htmlFor="title">Name:</FormLabel>
             <div className="w-3/4">
               <FormInputControl 
                 control={control}
-                name="title"
+                name="name"
                 type="text"
                 placeholder="Enter Brand Title here..."
-                errMsg={errors?.title?.message} />
-            </div>
-          </div>
-
-          <div className="flex items-center">
-            <FormLabel htmlFor="url">Url:</FormLabel>
-            <div className="w-3/4">
-              <FormInputControl 
-                control={control}
-                name="url"
-                type="url"
-                placeholder="Enter Brand Link here..."
-                errMsg={errors?.url?.message} />
+                errMsg={errors?.name?.message} />
             </div>
           </div>
 
@@ -85,12 +72,12 @@ export default function BrandCreatePage() {
           </div>
 
           <div className="flex items-center">
-            <FormLabel htmlFor="image">Image:</FormLabel>
+            <FormLabel htmlFor="image">Logo:</FormLabel>
             <div className="w-3/4">
               <FileInput 
-                name="image"
+                name="logo"
                 control={control}
-                errMsg={errors?.image?.message}
+                errMsg={errors?.logo?.message}
               />
             </div>
           </div>
