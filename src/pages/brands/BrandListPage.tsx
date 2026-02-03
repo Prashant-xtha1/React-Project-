@@ -26,7 +26,7 @@ export default function BrandListPage() {
         params: {
           page: page,
           limit: limit,
-          q: search
+          search: search
         }
       }) 
       setBrands(response.data);
